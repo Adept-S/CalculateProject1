@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static String calc(String input){
         boolean rim = false;
-        int res = 0;
+        int resoltation = 0;
         Scanner x = new Scanner(System.in);
         String math = x.nextLine();
         x.close();
@@ -22,13 +22,13 @@ public class Main {
         } else {
         for (char sym: operation){
             switch (sym){
-                case '+': res = Summ.add(math);
+                case '+': resoltation = Summ.add(math);
                     break;
-                case '-': res = Summ.sub(math);
+                case '-': resoltation = Summ.sub(math);
                     break;
-                case '*': res = Summ.mul(math);
+                case '*': resoltation = Summ.mul(math);
                     break;
-                case '/': res = Summ.div(math);
+                case '/': resoltation = Summ.div(math);
                     break;
             }
         }
@@ -37,7 +37,7 @@ public class Main {
             math = Rome.inverter(math);
             return math;
         } else {
-            return Integer.toString(res);
+            return Integer.toString(resoltation);
         }
     }
 
@@ -249,6 +249,7 @@ class Rome{
                     erro1=true;
                     break;
                 default: k = false;
+                erro1=false;
                 if (x1 == 0){x1 = result;}
             }
             x2 = result - x1;
@@ -257,7 +258,7 @@ class Rome{
             try {
             throw new IOException();
         } catch (IOException e) {
-            System.out.println("throws Exception");
+            System.out.println("throws Exception er");
             System.exit(0);
         }
         }
@@ -285,73 +286,46 @@ class Rome{
     }
     static String inverter(String inv){
         int x = Integer.parseInt(inv);
-        switch (x){
-            case 100 : inv = "C";
-                break;
-            case 90 : inv = "XC";
-                break;
-            case 80 : inv = "LXXX";
-                break;
-            case 70 : inv = "LXX";
-                break;
-            case 60 : inv = "LX";
-                break;
-            case 50 : inv = "L";
-                break;
-            case 40 : inv = "XL";
-                break;
-            case 30 : inv = "XXX";
-                break;
-            case 20 : inv = "XX";
-                break;
-            case 19 : inv = "IXX";
-                break;
-            case 18 : inv = "XVIII";
-                break;
-            case 17 : inv = "XVII";
-                break;
-            case 16 : inv = "XVI";
-                break;
-            case 15 : inv = "XV";
-                break;
-            case 14 : inv = "XIV";
-                break;
-            case 13 : inv = "XIII";
-                break;
-            case 12 : inv = "XII";
-                break;
-            case 11 : inv = "XI";
-                break;
-            case 10 : inv = "X";
-                break;
-            case 9 : inv = "IX";
-                break;
-            case 8 : inv = "VIII";
-                break;
-            case 7 : inv = "VII";
-                break;
-            case 6 : inv = "VI";
-                break;
-            case 5 : inv = "V";
-                break;
-            case 4 : inv = "IV";
-                break;
-            case 3 : inv = "III";
-                break;
-            case 2 : inv = "II";
-                break;
-            case 1 : inv = "I";
-                break;
-            default:
-                try {
-                    throw new IOException();
-                } catch (IOException e) {
-                    System.out.println("throws Exception");
-                    System.exit(0);
-                }
-
+        if (x<=0){
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                System.out.println("throws Exception");
+                System.exit(0);
+            }
         }
-        return inv;
+        String num = "";
+        while (x!=0) {
+            if (x >= 100) {
+                num = num + "C";
+                x -= 100;
+            } else if (x >= 90) {
+                num = num + "XC";
+                x -= 90;
+            } else if (x >= 50) {
+                num = num + "L";
+                x -= 50;
+            } else if (x >= 40) {
+                num = num + "XL";
+                x -= 40;
+            } else if (x >= 10) {
+                num = num + "X";
+                x -= 10;
+            } else if (x >= 9) {
+                num = num + "IX";
+                x -= 9;
+            } else if (x >= 5) {
+                num = num + "V";
+                x -= 5;
+            } else if (x >= 4) {
+                num = num + "IV";
+                x -= 4;
+            } else if (x >= 1) {
+                num = num + "I";
+                x -= 1;
+            }
+        }
+        return num;
     }
 }
 
